@@ -1,0 +1,11 @@
+your-domain.com {
+    encode zstd gzip
+
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "same-origin"
+    }
+
+    reverse_proxy 127.0.0.1:8000
+}
