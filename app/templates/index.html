@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block page_id %}index{% endblock %}
+
+{% block content %}
+  <main class="landing-shell">
+    <section class="hero-card">
+      <div class="hero-copy">
+        <span class="eyebrow">LinkDrop</span>
+        <h1>打开网页，马上互传。</h1>
+        <p>
+          适合手机和电脑之间快速传文字、文件，也适合临时多人房间里一起共享资料。
+          没有注册登录，没有额外负担，只保留最核心的实时协作体验。
+        </p>
+      </div>
+
+      <div class="panel-card form-panel">
+        <form method="post" class="stack-form">
+          <label class="field">
+            <span class="field-label">昵称</span>
+            <input
+              type="text"
+              name="nickname"
+              maxlength="32"
+              placeholder="例如：MacBook / iPhone / 小林"
+              value="{{ nickname_value }}"
+              required
+            />
+          </label>
+
+          <label class="field">
+            <span class="field-label">房间号</span>
+            <input
+              type="text"
+              name="room_code"
+              maxlength="24"
+              placeholder="输入已有房间号"
+              value="{{ room_code_value }}"
+              autocapitalize="characters"
+              spellcheck="false"
+            />
+          </label>
+
+          {% if error %}
+            <div class="form-error">{{ error }}</div>
+          {% endif %}
+
+          <div class="action-row">
+            <button type="submit" class="btn btn-primary" formaction="/rooms/create">
+              创建房间
+            </button>
+            <button type="submit" class="btn btn-secondary" formaction="/rooms/join">
+              进入房间
+            </button>
+          </div>
+        </form>
+
+        <div class="tips-grid">
+          <div class="tip-card">
+            <strong>实时同步</strong>
+            <span>同一房间内的文字和文件会立即出现。</span>
+          </div>
+          <div class="tip-card">
+            <strong>本地存储</strong>
+            <span>文件直接落到 VPS 本地 `uploads/` 目录。</span>
+          </div>
+          <div class="tip-card">
+            <strong>跨端可用</strong>
+            <span>手机浏览器和电脑浏览器都能直接打开使用。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock %}
