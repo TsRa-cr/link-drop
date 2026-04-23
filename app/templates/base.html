@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ page_title or "LinkDrop" }}</title>
+    <meta
+      name="description"
+      content="LinkDrop 是一个部署在 VPS 上的极简实时互传网站，支持多人房间、文字聊天和文件共享。"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}" />
+  </head>
+  <body data-page="{% block page_id %}default{% endblock %}">
+    {% block content %}{% endblock %}
+    <script src="{{ url_for('static', path='app.js') }}" defer></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
