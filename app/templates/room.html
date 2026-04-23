@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block page_id %}room{% endblock %}
+
+{% block content %}
+  <main class="room-shell">
+    <section class="room-panel">
+      <header class="room-header">
+        <div class="room-title">
+          <a href="/" class="brand-mark">LinkDrop</a>
+          <div>
+            <h1>房间 {{ room.code }}</h1>
+            <p>{{ nickname }} 已加入，文本和文件会实时同步到当前房间。</p>
+          </div>
+        </div>
+
+        <div class="room-meta">
+          <div class="meta-pill">
+            <span class="meta-label">昵称</span>
+            <strong>{{ nickname }}</strong>
+          </div>
+          <div class="meta-pill" id="connection-status" data-state="connecting">
+            正在连接
+          </div>
+        </div>
+      </header>
+
+      <section class="chat-stage" id="dropzone">
+        <div class="message-stream" id="message-stream" aria-live="polite"></div>
+        <div class="drop-hint" id="drop-hint">松开即可上传到房间</div>
+      </section>
+
+      <form class="composer" id="composer">
+        <div class="composer-main">
+          <textarea
+            id="message-input"
+            rows="1"
+            maxlength="4000"
+            placeholder="发送文字，或拖拽文件到这里"
+          ></textarea>
+        </div>
+        <div class="composer-actions">
+          <input id="file-input" type="file" name="file" multiple hidden />
+          <button type="button" class="btn btn-secondary" id="upload-trigger">
+            上传文件
+          </button>
+          <button type="submit" class="btn btn-primary" id="send-trigger">
+            发送
+          </button>
+        </div>
+      </form>
+
+      <div class="room-footnote">
+        单文件大小限制 {{ state.maxUploadMb }} MB。支持广泛文件类型传输，图片可缩略图预览，文本和代码文件支持基础预览。
+      </div>
+    </section>
+  </main>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    window.LINKDROP_STATE = {{ state | tojson }};
+  </script>
+{% endblock %}
